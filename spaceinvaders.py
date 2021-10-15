@@ -103,7 +103,6 @@ class Game:
                 screen.blit(laser.laser_sprite, laser.hitbox)
                 if laser.position[1] > settings.screen_size[1] + laser.size[1]:
                     enemy_lasers.remove(laser)
-                    print("removed")
                 if self.collision(ship.hitbox, laser.hitbox):
                     ship.lives -= 1
                     enemy_lasers.remove(laser)
