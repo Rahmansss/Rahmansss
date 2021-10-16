@@ -144,7 +144,6 @@ class Settings:
         self.screen_size = (1920, 1080)
         self.screen = pygame.display.set_mode(self.screen_size)
         self.background = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd(), r"pictures\background.jpg")),self.screen_size)
-        self.background = pygame.transform.scale(self.background, self.screen_size)
         self.speed = 60
         self.enemy_amount = 20
         self.lives = 5
