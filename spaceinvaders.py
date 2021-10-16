@@ -115,7 +115,7 @@ class Game:
                 screen.blit(enemy.alien_sprite, enemy.hitbox)
                 if enemy.explosion_frame == 7:
                     aliens.remove(enemy)
-                if self.collision(ship.hitbox,enemy.hitbox):
+                if self.collision(ship.hitbox, enemy.hitbox):
                     if not enemy.exploding:
                         enemy.play_sound()
                         self.score += 100
@@ -204,13 +204,10 @@ class Laser(pygame.sprite.Sprite):
 class Enemy_laser(Laser):
     def __init__(self):
         super().__init__()
+        self.step = -self.step
         self.laser_sprite = self.laser_sprite = pygame.transform.scale(
             pygame.image.load(os.path.join(os.getcwd(), r"pictures\enemy_laser.png")),
             self.size)
-
-    def move(self):
-        self.position[1] += self.step
-        self.r = pygame.Rect(self.position, self.size)
 
 
 class Alien(pygame.sprite.Sprite):
@@ -288,11 +285,11 @@ class Alien(pygame.sprite.Sprite):
         lasers.append(laser)
 
 
+settings = Settings()
 pygame.init()
 pygame.time.set_timer(pygame.USEREVENT, 1000)
 pygame.time.set_timer(MOVEDOWNEVENT, 5000)
 pygame.time.set_timer(MOVEVENT, 7500)
 game = Game()
-settings = Settings()
 ship = Ship()
 game.game_loop()
