@@ -71,6 +71,7 @@ class Game:
         background = settings.background
         screen = settings.screen
         clock = pygame.time.Clock()
+        ship = Ship()
         aliens = []
         lasers = []
         enemy_lasers = []
