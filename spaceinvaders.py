@@ -65,19 +65,18 @@ class Game:
         ship.move_right()
 
     def game_loop(self):
-        ship = Ship()
+        pygame.init()
+        pygame.font.init()
         speed = settings.speed
         background = settings.background
         screen = settings.screen
-        pygame.init()
-        pygame.font.init()
-        font = pygame.font.SysFont("impact", 25)
-        game_over_font = pygame.font.SysFont("impact", 50)
-        pygame.display.set_caption("Spaceinvaders")
         clock = pygame.time.Clock()
         aliens = []
         lasers = []
         enemy_lasers = []
+        font = pygame.font.SysFont("impact", 25)
+        game_over_font = pygame.font.SysFont("impact", 50)
+        pygame.display.set_caption("Spaceinvaders")
         while True:
             screen.blit(background, [0, 0])
             self.controls(ship, lasers, aliens, enemy_lasers)
@@ -106,8 +105,6 @@ class Game:
                 if self.collision(ship.hitbox, laser.hitbox):
                     ship.lives -= 1
                     enemy_lasers.remove(laser)
-                    if ship.lives <= 0:
-                        self.game_over = True
             for enemy in aliens:
                 enemy.move_vertical()
                 enemy.move_horizontal()
@@ -124,6 +121,8 @@ class Game:
                 if enemy.position[1] > settings.screen_size[1]:
                     self.game_over = True
             status_surface = font.render(f"lives:   {ship.lives}    score:  {self.score}", True, (0, 255, 0))
+            if ship.lives <= 0:
+                self.game_over = True
             if self.game_over:
                 while True:
                     game_over_surface = game_over_font.render(f"GAME OVER Score: {self.score}", True, (0, 255, 0))
