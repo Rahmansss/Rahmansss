@@ -141,9 +141,9 @@ class Game:
 
 class Settings:
     def __init__(self):
-        self.screen_size = (1920 // 2, 1080 // 2)
+        self.screen_size = (1920, 1080)
         self.screen = pygame.display.set_mode(self.screen_size)
-        self.background = pygame.image.load(os.path.join(os.getcwd(), r"pictures\background.png"))
+        self.background = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd(), r"pictures\background.jpg")),self.screen_size)
         self.background = pygame.transform.scale(self.background, self.screen_size)
         self.speed = 60
         self.enemy_amount = 20
@@ -293,3 +293,4 @@ pygame.time.set_timer(MOVEVENT, 7500)
 game = Game()
 ship = Ship()
 game.game_loop()
+
